@@ -14,9 +14,9 @@
 Este projeto foi desenvolvido como parte prática do **Curso de Power BI da Experiun**. O objetivo é transformar dados transacionais em um painel gerencial focado no monitoramento de receitas, custos operacionais e margem de contribuição.
 
 ### Principais Indicadores (KPIs):
-*   **R$ Receita:** R$ 3,54 Milhões
-*   **R$ Custo:** R$ 2,00 Milhões
-*   **R$ Margem:** R$ 1,54 Milhões
+- **R$ Receita:** R$ 3,54 Milhões
+- **R$ Custo:** R$ 2,00 Milhões
+- **R$ Margem:** R$ 1,54 Milhões
 ---
 ## Etapas do Desenvolvimento
   
