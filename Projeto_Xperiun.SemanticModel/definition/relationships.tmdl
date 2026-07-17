@@ -1,0 +1,9 @@
+relationship bd76d02e-a985-4f4b-a2be-ada08d51e66f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Vendas.Data
+	toColumn: LocalDateTable_24502f59-c372-4d40-aaad-5e42d508fbd7.Date
+
+relationship c85aa79d-1ae0-4fdb-b70a-062051ed9a80
+	fromColumn: Vendas.cdProduto
+	toColumn: Produto.'Cod Produto'
+

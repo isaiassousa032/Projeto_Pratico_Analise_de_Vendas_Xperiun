@@ -1,0 +1,112 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.3.0/schema.json",
+  "themeCollection": {
+    "baseTheme": {
+      "name": "CY21SU11",
+      "reportVersionAtImport": {
+        "visual": "1.8.64",
+        "report": "2.0.64",
+        "page": "1.3.64"
+      },
+      "type": "SharedResources"
+    },
+    "customTheme": {
+      "name": "Custom8397169783473504.json",
+      "reportVersionAtImport": {
+        "visual": "1.8.82",
+        "report": "2.0.82",
+        "page": "1.3.82"
+      },
+      "type": "RegisteredResources"
+    }
+  },
+  "objects": {
+    "section": [
+      {
+        "properties": {
+          "verticalAlignment": {
+            "expr": {
+              "Literal": {
+                "Value": "'Top'"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspacePane": [
+      {
+        "properties": {
+          "expanded": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "resourcePackages": [
+    {
+      "name": "SharedResources",
+      "type": "SharedResources",
+      "items": [
+        {
+          "name": "CY21SU11",
+          "path": "BaseThemes/CY21SU11.json",
+          "type": "BaseTheme"
+        }
+      ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "Custom8397169783473504.json",
+          "path": "Custom8397169783473504.json",
+          "type": "CustomTheme"
+        },
+        {
+          "name": "PagDark-14568205655590707.png",
+          "path": "PagDark-14568205655590707.png",
+          "type": "Image"
+        },
+        {
+          "name": "PagDark-36668624549175564.png",
+          "path": "PagDark-36668624549175564.png",
+          "type": "Image"
+        },
+        {
+          "name": "PagDark-3g10388598325981468.png",
+          "path": "PagDark-3g10388598325981468.png",
+          "type": "Image"
+        },
+        {
+          "name": "PagLight-16824330233135674.png",
+          "path": "PagLight-16824330233135674.png",
+          "type": "Image"
+        },
+        {
+          "name": "PagLight-222227884211573734.png",
+          "path": "PagLight-222227884211573734.png",
+          "type": "Image"
+        },
+        {
+          "name": "PagLight-305782663331435489.png",
+          "path": "PagLight-305782663331435489.png",
+          "type": "Image"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "useStylableVisualContainerHeader": true,
+    "exportDataMode": "AllowSummarized",
+    "defaultDrillFilterOtherVisuals": true,
+    "allowChangeFilterTypes": true,
+    "useEnhancedTooltips": false
+  }
+}

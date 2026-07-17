@@ -1,0 +1,68 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "ReportSection559643e3c8e39c6381f7",
+  "displayName": "Light2",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "image": {
+            "image": {
+              "name": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'PagLight-2.png'"
+                  }
+                }
+              },
+              "url": {
+                "expr": {
+                  "ResourcePackageItem": {
+                    "PackageName": "RegisteredResources",
+                    "PackageType": 1,
+                    "ItemName": "PagLight-222227884211573734.png"
+                  }
+                }
+              },
+              "scaling": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Fit'"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visibility": "HiddenInViewMode",
+  "visualInteractions": [
+    {
+      "source": "11579a8233a4a0053fd6",
+      "target": "0f41ca9b7518166d3833",
+      "type": "DataFilter"
+    },
+    {
+      "source": "11579a8233a4a0053fd6",
+      "target": "8eb33d98685c69300777",
+      "type": "DataFilter"
+    },
+    {
+      "source": "11579a8233a4a0053fd6",
+      "target": "27fb1dfd2d5c9386b16e",
+      "type": "NoFilter"
+    }
+  ]
+}

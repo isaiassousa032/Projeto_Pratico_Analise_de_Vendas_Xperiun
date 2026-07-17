@@ -1,0 +1,63 @@
+table Produto
+	lineageTag: 1e1558c4-c319-4fa9-8ac5-245cfb624d35
+
+	column 'Cod Produto'
+		dataType: int64
+		formatString: 0
+		lineageTag: 89887b3f-7bbd-4555-b567-1b2edc81163b
+		summarizeBy: none
+		sourceColumn: Cod Produto
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Grupo Produto'
+		dataType: string
+		lineageTag: e95ab964-fb4d-4fb4-8237-caf97da577f0
+		summarizeBy: none
+		sourceColumn: Grupo Produto
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Linha Produto'
+		dataType: string
+		lineageTag: 8c04089d-77c6-46b9-a38d-d1f209784ed0
+		summarizeBy: none
+		sourceColumn: Linha Produto
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fornecedor
+		dataType: string
+		lineageTag: 68f42612-ebef-4329-a056-d9bdaf87e3ec
+		summarizeBy: none
+		sourceColumn: Fornecedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustoUnitario
+		dataType: double
+		lineageTag: 717dbb55-4f18-459d-a6b9-9de5c7cf671a
+		summarizeBy: none
+		sourceColumn: CustoUnitario
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Produto-66d62a98-dcca-4185-ae3c-59805f832b49 = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("G:\Drives compartilhados\1. XPERIUN - EDUCATION\03. MATERIAIS GRATUITOS\17. [SI] SÉRIE INTERATIVA\0. CONTEÚDO\1. MATERIAIS\BaseDados\CadastroProdutos.xlsx"), null, true),
+				    Planilha1_Sheet = Fonte{[Item="Planilha1",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Planilha1_Sheet, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Cod Produto", Int64.Type}, {"Grupo Produto", type text}, {"Linha Produto", type text}, {"Fornecedor", type text}, {"CustoUnitario", type number}})
+				in
+				    #"Tipo Alterado"
+
+	changedProperty = Name
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

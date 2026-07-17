@@ -1,0 +1,67 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "ReportSectiond8060e56daf3c6944a79",
+  "displayName": "Dark3",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "image": {
+            "image": {
+              "name": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'PagDark-3g.png'"
+                  }
+                }
+              },
+              "url": {
+                "expr": {
+                  "ResourcePackageItem": {
+                    "PackageName": "RegisteredResources",
+                    "PackageType": 1,
+                    "ItemName": "PagDark-3g10388598325981468.png"
+                  }
+                }
+              },
+              "scaling": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Fit'"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "1e51a41260af411bcc50",
+      "target": "99cc2284f7a8fa49496b",
+      "type": "DataFilter"
+    },
+    {
+      "source": "1e51a41260af411bcc50",
+      "target": "7adcd4fe07e12e5d7208",
+      "type": "DataFilter"
+    },
+    {
+      "source": "1e51a41260af411bcc50",
+      "target": "ae26c4635793f8f4f53a",
+      "type": "NoFilter"
+    }
+  ]
+}

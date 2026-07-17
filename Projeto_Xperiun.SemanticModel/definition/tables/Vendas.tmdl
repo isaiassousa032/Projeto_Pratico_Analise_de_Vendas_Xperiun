@@ -1,0 +1,145 @@
+table Vendas
+	lineageTag: f508eaa7-009f-4699-b33c-b28ddba2cfdc
+
+	measure Margem = SUM(Vendas[Receita]) - SUM(Vendas[Custo])
+		formatString: "R$"\ #,0;-"R$"\ #,0;"R$"\ #,0
+		lineageTag: b1bf4e47-e265-4106-b9da-b35ac268cc73
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Margem %' = DIVIDE( [Margem], SUM(Vendas[Receita]) )
+		formatString: 0%;-0%;0%
+		lineageTag: cd320778-55a5-46ce-9ad2-eaec64254991
+
+		changedProperty = FormatString
+
+	measure 'Notas Emitidas' = DISTINCTCOUNT(Vendas[Nota Fiscal])
+		formatString: 0
+		lineageTag: 447e4be8-4b77-4641-8023-161326432084
+
+	column Data
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 14c94596-d74c-49b9-b813-d662acaaf991
+		summarizeBy: none
+		sourceColumn: Data
+
+		variation Variation
+			isDefault
+			relationship: bd76d02e-a985-4f4b-a2be-ada08d51e66f
+			defaultHierarchy: LocalDateTable_24502f59-c372-4d40-aaad-5e42d508fbd7.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Nota Fiscal'
+		dataType: int64
+		formatString: 0
+		lineageTag: edc7bfe2-3b15-48b6-b70d-08e840a34252
+		summarizeBy: sum
+		sourceColumn: Nota Fiscal
+
+		annotation SummarizationSetBy = Automatic
+
+	column cdProduto
+		dataType: int64
+		formatString: 0
+		lineageTag: caac404b-1c0b-41ba-9926-302eab4b77d4
+		summarizeBy: none
+		sourceColumn: cdProduto
+
+		annotation SummarizationSetBy = Automatic
+
+	column cdVendedor
+		dataType: int64
+		formatString: 0
+		lineageTag: 70084955-6566-49d1-a4e6-520068a10de6
+		summarizeBy: sum
+		sourceColumn: cdVendedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column Vendedor
+		dataType: string
+		lineageTag: 880c5941-ca65-42d9-88cc-4d5fef839198
+		summarizeBy: none
+		sourceColumn: Vendedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column Supervisor
+		dataType: string
+		lineageTag: 86f01b7a-7a4d-4c7b-a228-8d3dd2994f3a
+		summarizeBy: none
+		sourceColumn: Supervisor
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantidade
+		dataType: int64
+		formatString: 0
+		lineageTag: f0914dd3-b08e-44bf-9d8f-05018b4f2cd5
+		summarizeBy: sum
+		sourceColumn: Quantidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Valor Unitário'
+		dataType: decimal
+		lineageTag: 59c426ae-b470-4114-928d-4ff401a5cf49
+		summarizeBy: sum
+		sourceColumn: Valor Unitário
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Receita
+		dataType: decimal
+		formatString: "R$"\ #,0;-"R$"\ #,0;"R$"\ #,0
+		lineageTag: b9ad8b34-d7cc-4fcd-a751-c4bb5d3278f0
+		summarizeBy: sum
+		sourceColumn: Receita
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column Custo = RELATED('Produto'[CustoUnitario]) * Vendas[Quantidade]
+		formatString: "R$"\ #,0;-"R$"\ #,0;"R$"\ #,0
+		lineageTag: ae41220b-f514-4caa-a446-9d60afa6b427
+		summarizeBy: sum
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	partition Vendas-fb8a9ce0-49af-49d6-9f54-0b91b271b4da = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("G:\Drives compartilhados\1. XPERIUN - EDUCATION\03. MATERIAIS GRATUITOS\17. [SI] SÉRIE INTERATIVA\0. CONTEÚDO\1. MATERIAIS\BaseDados\BaseVendasCompleta.xlsx"), null, true),
+				    #"Linhas Filtradas" = Table.SelectRows(Fonte, each ([Kind] = "Table")),
+				    #"Outras Colunas Removidas" = Table.SelectColumns(#"Linhas Filtradas",{"Data"}),
+				    #"Data Expandido" = Table.ExpandTableColumn(#"Outras Colunas Removidas", "Data", {"Dia", "Mês", "Ano", "Nota Fiscal", "cdProduto", "cdVendedor", "Vendedor", "Supervisor", "Quantidade", "Valor Unitário"}, {"Dia", "Mês", "Ano", "Nota Fiscal", "cdProduto", "cdVendedor", "Vendedor", "Supervisor", "Quantidade", "Valor Unitário"}),
+				    #"Colunas Mescladas" = Table.CombineColumns(Table.TransformColumnTypes(#"Data Expandido", {{"Dia", type text}, {"Ano", type text}}, "pt-BR"),{"Dia", "Mês", "Ano"},Combiner.CombineTextByDelimiter("/", QuoteStyle.None),"Data"),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Colunas Mescladas",{{"Data", type date}, {"Nota Fiscal", Int64.Type}, {"cdProduto", Int64.Type}, {"cdVendedor", Int64.Type}, {"Vendedor", type text}, {"Supervisor", type text}, {"Quantidade", Int64.Type}, {"Valor Unitário", type number}}),
+				    #"Multiplicação Inserida" = Table.AddColumn(#"Tipo Alterado", "Multiplicação", each [Quantidade] * [Valor Unitário], type number),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Multiplicação Inserida",{{"Multiplicação", "Receita"}}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Colunas Renomeadas",{{"Receita", Currency.Type}, {"Valor Unitário", Currency.Type}})
+				in
+				    #"Tipo Alterado1"
+
+	changedProperty = Name
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
