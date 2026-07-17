@@ -5,6 +5,10 @@
 [![Excel](https://img.shields.io/badge/Excel-217346?style=for-the-badge&logo=powerbi&logoColor=white)](https://www.microsoft.com/pt-br/microsoft-365/excel)
 
 ---
+
+![alt text](Projeto_Xperiun.png)
+
+---
 ## Sobre o Projeto
 
 Este projeto foi desenvolvido como parte prática do **Curso de Power BI da Experiun**. O objetivo é transformar dados transacionais em um painel gerencial focado no monitoramento de receitas, custos operacionais e margem de contribuição.
